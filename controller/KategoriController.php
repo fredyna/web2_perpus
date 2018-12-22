@@ -1,18 +1,18 @@
 <?php
     $path = dirname(__DIR__);
-    require_once($path.'/model/UsersModel.php');
+    require_once($path.'/model/KategoriModel.php');
 
-    class UsersController{
+    class KategoriController{
 
         public function getAll(){
-            $user = new UsersModel();
-            $data = $user->getData();
+            $kategori = new KategoriModel();
+            $data = $kategori->getData();
             return $data;
         }
 
         public function getAllJson(){
-            $user = new UsersModel();
-            $result = $user->getData();
+            $kategori = new KategoriModel();
+            $result = $kategori->getData();
             $data = [];
             while($row = $result->fetch())
             {
@@ -23,8 +23,8 @@
         }
 
         public function getById($id){
-            $user = new UsersModel();
-            $result = $user->getDataById($id);
+            $kategori = new KategoriModel();
+            $result = $kategori->getDataById($id);
             $rows = [];
             while($row = $result->fetch())
             {
@@ -34,8 +34,8 @@
         }
 
         public function add($data){
-            $user = new UsersModel();
-            $save = $user->addData($data);
+            $kategori = new KategoriModel();
+            $save = $kategori->addData($data);
             if($save){
                 $result = true;
             } else{
@@ -46,8 +46,8 @@
         }
 
         public function update($id, $data){
-            $user = new UsersModel();
-            $update = $user->updateData($id, $data);
+            $kategori = new KategoriModel();
+            $update = $kategori->updateData($id, $data);
             if($update){
                 $result = true;
             } else{
@@ -58,8 +58,8 @@
         }
 
         public function delete($id){
-            $user = new UsersModel();
-            $delete = $user->deleteData($id);
+            $kategori = new KategoriModel();
+            $delete = $kategori->deleteData($id);
             if($delete){
                 $result = true;
             } else{

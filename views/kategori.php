@@ -6,29 +6,27 @@
 <!-- Content -->
 <div class="px-content">
   <div class="page-header">
-    <h1><i class="px-nav-icon ion-home"></i><span class="px-nav-label"></span>USER</h1>
+    <h1><i class="px-nav-icon ion-home"></i><span class="px-nav-label"></span>KATEGORI</h1>
   </div>
 
     <div class="row">
         <div class="col-sm-12">
         <div class="panel">
-            <div id="judul_form" class="panel-title">Data User</div>
-                <small class="panel-subtitle text-muted">Tabel Data User</small>
+            <div id="judul_form" class="panel-title">Data kategori</div>
+                <small class="panel-subtitle text-muted">Tabel Data kategori</small>
                 <div class="panel-body">
                     <button id="btn-add" type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal-form">Tambah Data</button>
                     <br /><br />
                     <div class="table-success">
-                        <table id="table-user" class="table table-bordered table-condensed table-striped table-hover">
+                        <table id="table-kategori" class="table table-bordered table-condensed table-striped table-hover">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>NIM</th>
-                                    <th>Nama</th>
-                                    <th>Email</th>
-                                    <th>Aksi</th>
+                                    <th>NO</th>
+                                    <th>KATEGORI</th>
+                                    <th>AKSI</th>
                                 </tr>
                             </thead>
-                            <tbody id="body-table-user">
+                            <tbody id="body-table-kategori">
                             </tbody>
                         </table>
                     </div>
@@ -47,54 +45,23 @@
             <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">×</button>
-                <h4 class="modal-title">Form Tambah Data User</h4>
+                <h4 class="modal-title">Form Tambah Data Kategori Buku</h4>
             </div>
             <div class="modal-body">
                 <div class="form-horizontal" method="post">
                     <!-- hidden input id -->
-                    <input type="hidden" id="id" name="id" style="display:none;">
+                    <input type="hidden" id="id"  name="id" style="display:none;">
 
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-sm-3 control-label">Username</label>
+                            <label class="col-sm-3 control-label">Kategori</label>
                             <div class="col-sm-7">
-                                <input type="text" id="username" placeholder="Masukan username" class="form-control" required>
+                                <input type="text" id="kategori" placeholder="Masukan kategori" class="form-control" required>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-sm-3 control-label">Nama</label>
-                            <div class="col-sm-7">
-                                <input type="text" id="nama" placeholder="Masukan nama" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-sm-3 control-label">Email</label>
-                            <div class="col-sm-7">
-                                <input type="email" id="email" placeholder="Masukan email" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-sm-3 control-label">Password</label>
-                            <div class="col-sm-7">
-                                <input type="password" id="password" placeholder="Masukan ulang password" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-sm-3 control-label">Repeat Password</label>
-                            <div class="col-sm-7">
-                                <input type="password" id="r-password" placeholder="Masukan ulang password" class="form-control" required>
-                            </div>
-                        </div>
-                    </div>
+                    
                     <div class="form-group text-right">
                         <div class="row">
                             <div class="col-sm-10">
@@ -115,10 +82,10 @@
 
 <script>
     //get data using datatables server side
-    var table = $('#table-user').DataTable( { 
+    var table = $('#table-kategori').DataTable( { 
         "processing": true,
         "serverSide": true,
-        "ajax": "views/user_getData.php",
+        "ajax": "views/kategori_getData.php",
         "columnDefs": [ {
             "targets": -1,
             "data": null,
@@ -127,7 +94,7 @@
     });
 
     $(function(){
-        $("#menu-user").addClass('active');
+        $("#menu-kategori").addClass('active');
 
         $("#btn-add").click(function(){
             clearForm();
@@ -136,11 +103,11 @@
         });
 
         //get data by id
-        $('#table-user tbody').on( 'click', '.tblEdit', function () {
+        $('#table-kategori tbody').on( 'click', '.tblEdit', function () {
             var data = table.row( $(this).parents('tr') ).data();
 
             $.ajax({
-                url: 'views/user_edit.php',
+                url: 'views/kategori_edit.php',
                 type: 'POST',
                 dataType: 'json',
                 data: {
@@ -150,11 +117,7 @@
                 $("#modal-form").modal('show');
                 clearForm();
                 $("#id").val(data[0].id);
-                $("#nama").val(data[0].nama);
-                $("#email").val(data[0].email);
-                $("#username").val(data[0].usernames);
-                $("#password").val("");
-                $("#r-password").val("");
+                $("#kategori").val(data[0].kategori);
 
                 $("#btn-simpan").hide();
                 $("#btn-update").show();
@@ -165,7 +128,7 @@
         } );
 
         //hapus data
-        $('#table-user tbody').on( 'click', '.tblHapus', function () {
+        $('#table-kategori tbody').on( 'click', '.tblHapus', function () {
             var data = table.row( $(this).parents('tr') ).data();
 
             swal({
@@ -177,7 +140,7 @@
                 })
                 .then((willDelete) => {
                 if (willDelete) {
-                    deleteUser(data[0]);
+                    deleteKategori(data[0]);
                 } else {
                     swal("Data gagal dihapus!",{
                         icon: "error",
@@ -188,48 +151,25 @@
 
         //simpan data
         $("#btn-simpan").click(function(){
-            if($("#password").val() != $("#r-password").val()){
-                swal("Gagal", "Kolom Repeat Password tidak sama!", "error");
+
+            if($("#kategori").val() == ""){
+                swal("Gagal", "Kategori harus diisi", "error");
                 return;
             }
 
-            if($("#password").val() == ""){
-                swal("Gagal", "Password harus diisi", "error");
-                return;
+            var kat = {
+                kategori: $("#kategori").val()
             }
 
-            if($("#username").val() == ""){
-                swal("Gagal", "Username harus diisi", "error");
-                return;
-            }
-
-            if($("#nama").val() == ""){
-                swal("Gagal", "Nama harus diisi", "error");
-                return;
-            }
-
-
-            if($("#email").val() == ""){
-                swal("Gagal", "Email harus diisi", "error");
-                return;
-            }
-
-            var user = {
-                nama: $("#nama").val(),
-                email: $("#email").val(),
-                usernames: $("#username").val(),
-                password: $("#password").val()
-            }
-
-            user = JSON.stringify(user);
+            kat = JSON.stringify(kat);
 
             $.ajax({
-                url: 'views/user_proses.php',
+                url: 'views/kategori_proses.php',
                 type: 'POST',
                 dataType: 'json',
                 data: {
                     'action': 'simpan',
-                    'data': user
+                    'data': kat
                 }
             }).done(function(data){
                 if(data){
@@ -248,45 +188,28 @@
 
         //update data
         $("#btn-update").click(function(){
-            if($("#password").val() != $("#r-password").val()){
-                swal("Gagal", "Kolom Repeat Password tidak sama!", "error");
+
+            if($("#kategori").val() == ""){
+                swal("Gagal", "Kategori harus diisi", "error");
                 return;
             }
 
-            if($("#username").val() == ""){
-                swal("Gagal", "Username harus diisi", "error");
-                return;
-            }
-
-            if($("#nama").val() == ""){
-                swal("Gagal", "Nama harus diisi", "error");
-                return;
-            }
-
-
-            if($("#email").val() == ""){
-                swal("Gagal", "Email harus diisi", "error");
-                return;
-            }
 
             var id = $("#id").val();
-            var user = {
-                nama: $("#nama").val(),
-                email: $("#email").val(),
-                usernames: $("#username").val(),
-                password: $("#password").val()
+            var kat = {
+                kategori: $("#kategori").val()
             }
 
-            user = JSON.stringify(user);
+            kat = JSON.stringify(kat);
 
             $.ajax({
-                url: 'views/user_proses.php',
+                url: 'views/kategori_proses.php',
                 type: 'POST',
                 dataType: 'json',
                 data: {
                     'action': 'update',
                     'id': id,
-                    'data': user
+                    'data': kat
                 }
             }).done(function(data){
                 if(data){
@@ -305,18 +228,14 @@
     });
 
     function clearForm(){
-        $("#nama").val("");
-        $("#email").val("");
-        $("#username").val("");
-        $("#password").val("");
-        $("#r-password").val("");
+        $("#kategori").val("");
 
-        $("#username").focus();
+        $("#kategori").focus();
     }
 
-    function deleteUser(id){
+    function deleteKategori(id){
         $.ajax({
-            url: 'views/user_hapus.php?id='+id,
+            url: 'views/kategori_hapus.php?id='+id,
             type: 'GET',
             dataType: 'json',
         }).done(function(data){

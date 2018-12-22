@@ -1,12 +1,10 @@
 <?php
-$table = 'tb_user';
+$table = 'tb_kategori';
 $primaryKey = 'id';
  
 $columns = array(
     array( 'db' => 'id', 'dt' => 0 ),
-    array( 'db' => 'usernames','dt' => 1 ),
-    array( 'db' => 'nama','dt' => 2 ),
-    array( 'db' => 'email','dt' => 3 ),
+    array( 'db' => 'kategori','dt' => 1 ),
 );
  
 $sql_details = array(

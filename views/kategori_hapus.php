@@ -1,11 +1,11 @@
 <?php
 
-    require_once('../controller/UsersController.php');
-    $user = new UsersController();
+    require_once('../controller/KategoriController.php');
+    $kategori = new KategoriController();
 
     if(isset($_GET['id'])){
         $id = $_GET['id'];
-        $user->delete($id);
+        $kategori->delete($id);
     } else{
         $result = false;
         echo json_encode($result);
